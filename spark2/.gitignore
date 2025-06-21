@@ -1,0 +1,10 @@
+# Ignore appsettings.json
+appsettings.json
+
+# Ignore common build folders
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo

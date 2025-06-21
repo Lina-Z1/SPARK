@@ -1,0 +1,84 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+    ViewData["ShowSidebar"] = false;
+}
+
+<div class="container py-3 flex justify-content-center ">
+    <div class="bg-white p-4 rounded-4 shadow-sm">
+        <div class="row g-4">
+            <!-- Profile Form -->
+            <form id="profile-form" method="post" enctype="multipart/form-data" class="row g-4">
+
+                <!-- Left Column: Fields -->
+                <div class="col-lg-6">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-uppercase">First Name</label>
+                        <input asp-for="Input.FirstName" class="form-control rounded-3" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-uppercase">Last Name</label>
+                        <input asp-for="Input.LastName" class="form-control rounded-3" />
+                        <span asp-validation-for="Input.LastName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-uppercase">Email</label>
+                        <input asp-for="Username" class="form-control rounded-3" disabled />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-uppercase">Phone Number</label>
+                        <input asp-for="Input.PhoneNumber" class="form-control rounded-3" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="mt-4">
+                        <button id="update-profile-button" type="submit"
+                                class="btn w-100 text-white fw-bold rounded-3 py-2 btn-primary">
+                            SAVE
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: Profile Picture -->
+                <div class="col-lg-6 d-flex align-items-stretch">
+                    <div class="w-100">
+                        <div class="position-relative w-100 h-100 " style="max-width: 400px; margin: 0 auto;">
+                            <img id="ProfilePicture"
+                                 src="@(Model.Input.ProfilePicture != null
+                                     ? $"data:image/*;base64,{Convert.ToBase64String(Model.Input.ProfilePicture)}"
+                                     : Url.Content("~/images/ProfilePicture.jpg"))"
+                                 alt="Profile Picture"
+                                 class="w-100 h-100"
+                                 style="object-fit: cover; border-radius: 0.5rem;" />
+
+                            <!-- Camera Icon Overlay -->
+                            <label for="profilePicUpload"
+                                   class="position-absolute bottom-0 end-0 m-3 rounded-circle d-flex justify-content-center align-items-center"
+                                   style="width: 50px; height: 50px; background-color: rgba(255,255,255,0.5); cursor: pointer;">
+                                <i class="bi bi-camera-fill text-danger fs-4"></i>
+                            </label>
+
+                            <input type="file" accept="image/*"
+                                   asp-for="Input.ProfilePicture"
+                                   class="form-control d-none"
+                                   id="profilePicUpload"
+                                   onchange="document.getElementById('ProfilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                        </div>
+
+                        <span asp-validation-for="Input.ProfilePicture" class="text-danger mt-2 small d-block text-center"></span>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

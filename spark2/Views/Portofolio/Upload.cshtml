@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["ShowSidebar"] = false;
+    ViewData["Title"] = "Generate Portfolio";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-danger text-white rounded-top-4">
+                    <h4 class="mb-0 text-white ">Generate Your Portfolio</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="post" asp-controller="Portofolio" asp-action="Parse">
+                        <div class="mb-3">
+                            <label for="rawText" class="form-label fw-semibold">Portfolio Content</label>
+                            <textarea name="rawText"
+                                      id="rawText"
+                                      class="form-control"
+                                      placeholder="Enter portfolio info here..."
+                                      rows="6"
+                                      style="resize: none;"></textarea>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-danger rounded-pill px-4 py-2 shadow-sm">
+                              Generate Portfolio
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

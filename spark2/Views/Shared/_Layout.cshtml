@@ -1,0 +1,150 @@
+﻿@{
+    var showSidebar = ViewData["ShowSidebar"] as bool? ?? true;
+    var showHr = ViewData["showHr"] as bool? ?? true;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Spark</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/assets/css/sb-admin-2.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/spark2.styles.css" asp-append-version="true" />
+</head>
+
+<body class="d-flex flex-column  ">
+    <div id="wrapper" class="d-flex w-100">
+
+        @if (showSidebar)
+        {
+            <!-- Sidebar -->
+            <ul class="navbar-nav sidebar sidebar-light accordion text-danger " id="accordionSidebar">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user/dashboard">
+                        <i class="bi bi-house-door-fill text-danger"></i>
+                        <span class="text-danger" >Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="User" asp-action="Index">
+                        <i class="bi bi-person-lock text-danger"></i>
+                        <span class="text-danger">Manage Users</span>
+                    </a>
+                </li>
+
+                @* <hr class="sidebar-divider" /> *@
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Resume" asp-action="Index">
+                        <i class="bi bi-people fa-2x text-danger"></i>
+                        <span class="text-danger">My Resumes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Portofolio" asp-action="Index">
+                        <i class="fa fa-briefcase fa-2x text-danger"></i>
+                        <span class="text-danger">My Portfolios</span>
+                    </a>
+                </li>
+
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+            </ul>
+        }
+
+        <!-- Content Wrapper -->       
+        <div id="content-wrapper" class="d-flex flex-column min-vh-100 w-100  ">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-1 shadow justify-content-center">
+                <a class="navbar-brand fw-bold text-danger" asp-controller="Home" asp-action="Index">SPARK</a>
+
+                <div class="mx-auto">
+                    <ul class="navbar-nav d-flex justify-content-center">
+                        <li class="nav-item"><a class="nav-link text-dark" style="color: #000 !important;" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" style="color: #000 !important;" asp-controller="Resume" asp-action="Index">Resume Builder</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" style="color: #000 !important;" asp-controller="Portofolio" asp-action="Index">Portfolio Builder</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" style="color: #000 !important;" asp-controller="Home" asp-action="AboutUs">About</a></li>
+                    </ul>
+                </div>
+                <partial name="_LoginPartial" />
+            </nav>
+
+            <!-- Main Content -->
+            <main class="flex-grow-1">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </main>          
+
+            <footer class="py-4">
+                @if (showHr)
+                {
+                    <hr />
+                }
+
+                <div class="container">
+                    <div class="row justify-content-between pt-4 pb-3 pb-lg-5">
+                        <div class="col-12 col-lg-7">
+
+                            <a asp-controller="Home" asp-action="Index" class="text-decoration-none">
+                                <span class="fw-bold text-danger display-6">SPARK</span>
+                            </a>
+
+                            <p class="mb-3">helps you create standout resumes and portfolios to boost your career.<br /><small class="text-muted">Build. Showcase. Succeed.</small></p>
+
+                            <div class="mb-3">
+                                <a class="me-2 text-danger" href=""><i class="bi bi-pinterest"></i></a>
+                                <a class="me-2 text-danger" href=""><i class="bi bi-twitter"></i></a>
+                                <a class="me-2 text-danger" href=""><i class="bi bi-facebook"></i></a>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-lg-2 small text-lg-end mb-4 md-lg-0 pt-1">
+                            <p class="mb-1"><a class="text-dark text-decoration-none" asp-controller="Home" asp-action="Index">Home</a></p>
+                            <p class="mb-1"><a class="text-dark text-decoration-none" asp-controller="Resume" asp-action="Index">Resume</a></p>
+                            <p class="mb-1"><a class="text-dark text-decoration-none" asp-controller="Portofolio" asp-action="Index">Portfolio</a></p>
+                            <p class="mb-0"><a class="text-dark text-decoration-none" asp-controller="Home" asp-action="AboutUs">About</a></p>
+                        </div>
+                        <div class="col-12 col-lg-3 pt-1 small text-lg-end">
+                            <p class="mb-1">Jordan View</p>
+                            <p class="mb-1">Jordan, Amman</p>
+                            <p class="mb-1">Tel: +962-079 55345234</p>
+                            <p class="mb-0"><a class="text-dark text-decoration-none" href="">Contact@Spark.com</a></p>
+                        </div>
+                    </div>
+                    <div class="border-top d-lg-none"></div>
+                    <div class="d-lg-flex justify-content-between py-3">
+                        <div class="small">
+                            <span class="d-block d-lg-inline text-muted mb-2 mb-lg-0 me-lg-5"> &copy; @DateTime.Now.Year - SPARK - All rights reserved </span> <span class="d-block d-lg-inline text-muted mb-2 mb-lg-0 me-lg-5" href="">Privacy Policy</span> <span class="d-block d-lg-inline text-muted mb-2 mb-lg-0 me-lg-5" href="">Terms of Service</span>
+                        </div>
+                    </div>
+                </div>
+
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->  
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/assets/js/sb-admin-2.min.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
+

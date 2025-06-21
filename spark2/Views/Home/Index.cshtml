@@ -1,0 +1,249 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    ViewData["ShowSidebar"] = false;
+}
+
+
+<div class="container mt-3">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+         
+        <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <div class="lc-block mb-3">
+                <div editable="rich">
+                    <h4 class="fw-bold display-6">
+                        Resumes and Portfolios Made Simple
+                         
+                    </h4>
+                </div>
+            </div>
+
+            <div class="lc-block mb-3">
+                <div editable="rich">
+                    <p class="lead">
+                        Quickly build and customize responsive mobile-first resumes and portfolios with  spark  
+                    </p>
+                </div>
+            </div>
+
+            <div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start">               
+                <a class="btn btn-outline-primary px-4" asp-controller="Resume" asp-action="Index" role="button">Build Resume</a>
+                <a class="btn btn-outline-danger px-4" asp-controller="Portofolio" asp-action="Index" role="button">Build Portfolio</a>
+            </div>
+        </div>
+        <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+            <div class="lc-block"><img class="rounded-start w-100" src="https://images.unsplash.com/photo-1493612276216-ee3925520721?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8M3x8d2Vic2l0ZXxlbnwwfDF8fHwxNjIxNDQ4NTEw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080" alt="Photo by Diego PH" width="720"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 g-1 ">
+
+        <div class="col-md-6 align-self-center">
+            <div class="lc-block mb-2">
+                <div editable="rich">
+                    <h1>Why Choose Spark?</h1>
+                    <p class="text-secondary">
+                        Spark empowers job seekers, freelancers, and creatives to craft beautiful, mobile-friendly resumes and portfolios that stand out. Whether you're applying for your first job or showcasing years of experience, our tools help you tell your story the right way.
+                    </p>
+                </div>
+            </div><!-- /lc-block -->
+        </div><!-- /col -->
+        <div class="col-md-6">
+            <div class="lc-block shadow">
+                <img class="img-fluid" alt="" src="~/images/home1.jpg" loading="lazy">
+            </div><!-- /lc-block -->
+        </div><!-- /col -->
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 g-1 ">
+
+        <div class="col-md-6 align-self-center">
+            <div class="lc-block mb-2">
+                <div editable="rich">
+                    <h1>All-in-One Career Toolkit</h1>
+                    <p class="text-secondary">
+                        With Spark, you don’t just build documents,you build your brand. Our easy-to-use interface, modern templates, and export features help you go from blank page to hired faster. Save your work, update it anytime, and share instantly.
+                    </p>
+                </div>
+            </div><!-- /lc-block -->
+        </div><!-- /col -->
+        <div class="col-md-6">
+            <div class="lc-block shadow">
+                <img class="img-fluid" alt="" src="~/images/home4.webp" loading="lazy">
+            </div><!-- /lc-block -->
+        </div><!-- /col -->
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="container py-6">
+    <div class="row mb-4">
+        <div class="col-md-12 text-center">
+            <div class="lc-block mb-4">
+                <h2 editable="inline" class="h1">Our Partners</h2>
+                <p class="text-secondary">
+                    Trusted by professionals and teams at top companies. Join thousands who use Spark to build their career presence
+                </p>
+
+                
+            </div><!-- /lc-block -->
+        </div>
+    </div>
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-xl-5 text-center text-xl-start align-items-center g-4 g-md-0">
+
+        <div class="col py-3">
+            <div class="lc-block">
+                <img class="img-fluid" src="https://cdn.livecanvas.com/media/logos/world-logo/samsung.svg" width="128" height="128" loading="lazy">
+            </div><!-- /lc-block -->
+        </div>
+        <div class="col py-3">
+            <div class="lc-block">
+                <img class="img-fluid" src="https://cdn.livecanvas.com/media/logos/world-logo/mailchimp.svg" width="128" height="128" loading="lazy">
+            </div>
+        </div>
+        <div class="col py-3">
+            <div class="lc-block">
+                <img class="img-fluid" src="https://cdn.livecanvas.com/media/logos/world-logo/google.svg" width="128" height="128" loading="lazy">
+            </div>
+        </div>
+        <div class="col py-3">
+            <div class="lc-block">
+                <img class="img-fluid" src="https://cdn.livecanvas.com/media/logos/world-logo/netflix.svg" width="128" height="128" loading="lazy">
+            </div>
+        </div>
+
+        <div class="col py-3">
+            <div class="lc-block">
+                <img class="img-fluid" src="https://cdn.livecanvas.com/media/logos/world-logo/adobe.svg" width="128" height="128" loading="lazy">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto">
+
+            <div class="lc-block py-5 text-center">
+                <div id="carouselTestimonial" class="carousel slide pb-4" data-bs-ride="carousel">
+                    <div class="carousel-inner px-5">
+                        <div class="carousel-item active">
+
+                            <div class="row">
+
+                                <div class="lc-block">
+                                    <div editable="rich">
+                                        <p class="rfs-8 text-muted">"Spark helped me build a resume that finally got noticed. Within a week, I had three interviews and landed a job I love!"</p>
+                                    </div>
+                                </div>
+                                <div class="lc-block">
+                                    <div class="lc-block d-inline-flex">
+                                        <div class="lc-block me-3" style="min-width:72px">
+                                            <img class="img-fluid rounded-circle " src="https://i.pravatar.cc/96?img=8" width="72" height="72">
+                                        </div>
+                                        <div class="lc-block">
+                                            <div editable="rich">
+
+                                                <p class="h5">James C. Call</p>
+
+                                                <p class="text-muted">UX Designer</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="lc-block">
+                                    <div editable="rich">
+                                        <p class="rfs-8 text-muted">“The best resume builder I've used—super sleek template and incredibly easy to navigate. It made the whole process fast, smooth, and even enjoyable.”</p>
+                                    </div>
+                                </div>
+                                <div class="lc-block">
+                                    <div class="lc-block d-inline-flex">
+                                        <div class="lc-block me-3" style="min-width:72px">
+                                            <img class="img-fluid rounded-circle " src="https://i.pravatar.cc/96?img=32" width="72" height="72">
+                                        </div>
+                                        <div class="lc-block">
+                                            <div editable="rich">
+
+                                                <p class="h5">Leslie R. Oleary</p>
+
+                                                <p class="text-muted">Marketing Associate</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="lc-block">
+                                    <div editable="rich">
+                                        <p class="rfs-8 text-muted">"Spark made resume-building easy I went from blank screen to job offer in under an hour!"</p>
+                                    </div>
+                                </div>
+                                <div class="lc-block">
+                                    <div class="lc-block d-inline-flex">
+                                        <div class="lc-block me-3" style="min-width:72px">
+                                            <img class="img-fluid rounded-circle " src="https://i.pravatar.cc/96?img=26" width="72" height="72">
+                                        </div>
+                                        <div class="lc-block">
+                                            <div editable="rich">
+
+                                                <p class="h5">Elena E. Torres</p>
+
+                                                <p class="text-muted">educator&nbsp;</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="w-100 text-center mt-3">
+                        <a class="carousel-control-prev position-relative d-inline me-4" href="#carouselTestimonial" data-bs-slide="prev">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="text-dark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+                            </svg>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next position-relative d-inline" href="#carouselTestimonial" data-bs-slide="next">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="text-dark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
+                            </svg>
+                            <span class="visually-hidden">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /col -->
+    </div>
+</div>
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,526 @@
+﻿@using spark2.Models.DTOs
+@model ResumeDTO
+
+@{
+    ViewData["Title"] = "Edit Resume";
+    ViewData["ShowSidebar"] = false;
+
+    var certificates = ViewBag.Certificates as List<CertificateDTO>;
+    var educations = ViewBag.Educations as List<EducationDTO>;
+    var skills = ViewBag.Skills as List<SkillDTO>;
+    var languages = ViewBag.Languages as List<LanguageDTO>;
+    var experiences = ViewBag.Experiences as List<ExperienceDTO>;
+}
+
+<div class="container mt-2 ">
+    <h2>Edit Resume </h2>
+
+    <ul class="nav nav-tabs" id="resumeTabs" role="tablist">
+        <li class="nav-item"><button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">Basic Info</button></li>
+        <li class="nav-item"><button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education" type="button" role="tab" aria-controls="education" aria-selected="false">Education</button></li>
+        <li class="nav-item"><button class="nav-link" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience" type="button" role="tab" aria-controls="experience" aria-selected="false">Experience</button></li>
+        <li class="nav-item"><button class="nav-link" id="skill-tab" data-bs-toggle="tab" data-bs-target="#skill" type="button" role="tab" aria-controls="skill" aria-selected="false">Skills</button></li>
+
+        <li class="nav-item">
+            <button class="nav-link" id="language-tab" data-bs-toggle="tab" data-bs-target="#language" type="button" role="tab" aria-controls="language" aria-selected="false">Languages</button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link" id="certificates-tab" data-bs-toggle="tab" data-bs-target="#certificates" type="button" role="tab" aria-controls="certificates" aria-selected="false">
+                Certificates
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+            <form id="basicForm">
+                <input type="hidden" id="ResumeId" name="ResumeId" value="@Model.ResumeId" />
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="FirstName">First Name<span class="text-danger">*</span></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="LastName">Last Name</label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Email">Email<span class="text-danger">*</span></label>
+                        <input asp-for="Email" class="form-control" type="email" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="PhoneNumber">Phone</label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Title">Title</label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Address">Address</label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Link1">Link1</label>
+                        <input asp-for="Link1" class="form-control" />
+                        <span asp-validation-for="Link1" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Link2">Link2</label>
+                        <input asp-for="Link2" class="form-control" />
+                        <span asp-validation-for="Link2" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Link3">Link3</label>
+                        <input asp-for="Link3" class="form-control" />
+                        <span asp-validation-for="Link3" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label asp-for="Summary">Summary</label>
+                        <textarea asp-for="Summary" class="form-control"></textarea>
+                        <span asp-validation-for="Summary" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="submitBasic()">Save & Next</button>
+            </form>
+        </div>
+
+
+        <!-- Education Tab -->
+        <div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
+            <div id="educationContainer">
+                @foreach (var education in educations)
+                {
+                    <div class="education-group mb-3 border p-3 rounded bg-light">
+                        <input type="hidden" id="ResumeId" value="@Model.ResumeId" />
+                        <input type="hidden" name="EducationId" value="@education.EducationId" />
+                        <input placeholder="University Name" name="UniversityName" value="@education.UniversityName" class="form-control mb-2" />
+                        <input placeholder="Degree Type" name="DegreeType" value="@education.DegreeType" class="form-control mb-2" />
+                        <input placeholder="Major" name="Major" value="@education.Major" class="form-control mb-2" />
+                        <input placeholder="Start Date" name="StartDate" value="@education.StartDate" type="date" class="form-control mb-2" />
+                        <input placeholder="End Date" name="EndDate" value="@education.EndDate" type="date" class="form-control mb-2" />
+                        <input placeholder="GPA" name="GPA" value="@education.GPA" class="form-control mb-2" />
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteEducation(@education.EducationId, this)">Delete</button>
+                    </div>
+                }
+            </div>
+            <button type="button" class="btn btn-outline-secondary mb-3" onclick="addEducationInput()">+ Add Education</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('basic')">Back</button>
+                <button class="btn btn-success" onclick="submitEducations()">Save & Next</button>
+            </div>
+        </div>
+
+        <!-- Experience Tab -->
+        <div class="tab-pane fade" id="experience" role="tabpanel" aria-labelledby="experience-tab">
+            <div id="experienceContainer">
+                @foreach (var experience in experiences)
+                {
+                    <div class="experience-group mb-3 border p-3 rounded bg-light">
+                        <input type="hidden" name="ResumeId" value="@Model.ResumeId" />
+                        <input type="hidden" name="ExperienceId" value="@experience.ExperienceId" />
+                        <input placeholder="Company Name" name="CompanyName" value="@experience.CompanyName" class="form-control mb-2" />
+                        <input placeholder="Position" name="Position" value="@experience.Position" class="form-control mb-2" />
+                        <input placeholder="Start Date" name="StartDate" value="@experience.StartDate" type="date" class="form-control mb-2" />
+                        <input placeholder="End Date" name="EndDate" value="@experience.EndDate" type="date" class="form-control mb-2" />
+                        <textarea placeholder="Duties " name="Duties" class="form-control mb-2">@experience.Duties </textarea>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteExperience(@experience.ExperienceId, this)">Delete</button>
+                    </div>
+                }
+            </div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addExperienceInput()">+ Add Experience</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('education')">Back</button>
+                <button class="btn btn-success" onclick="submitExperience()">Save & Next</button>
+            </div>
+        </div>
+
+        <!-- Skills Tab -->
+        <div class="tab-pane fade" id="skill" role="tabpanel" aria-labelledby="skill-tab">
+            <div id="skillsContainer">
+                @foreach (var skill in skills)
+                {
+                    <div class="skill-group mb-3 border p-3 rounded bg-light">
+                        <input type="hidden" name="ResumeId" value="@Model.ResumeId" />
+                        <input type="hidden" name="SkillId" value="@skill.SkillId" />
+                        <input placeholder="Skill Name" name="SkillName" value="@skill.SkillName" class="form-control mb-2" />
+                        <select name="SkillType" class="form-control mb-2">
+                            @{
+                                var types = new[] { "Technical", "Soft", "Language", "Management", "Analytical", "Creative" };
+                                foreach (var type in types)
+                                {
+                                    var selected = skill.SkillType == type ? "selected=\"selected\"" : "";
+                                    @Html.Raw($"<option value=\"{type}\" {selected}>{type}</option>")
+                                }
+                            }
+                        </select>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteSkill(@skill.SkillId, this)">Delete</button>
+                    </div>
+                }
+            </div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addSkillInput()">+ Add Skill</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('experience')">Back</button>
+                <button class="btn btn-success" onclick="submitSkills()">Save & Next</button>
+            </div>
+        </div>
+
+        <!-- Languages Tab -->
+        <div class="tab-pane fade" id="language" role="tabpanel" aria-labelledby="language-tab">
+            <div id="languagesContainer">
+                @foreach (var language in languages)
+                {
+                    <div class="language-group mb-3 border p-3 rounded bg-light">
+                        <input type="hidden" name="ResumeId" value="@Model.ResumeId" />
+                        <input type="hidden" name="LanguageId" value="@language.LanguageId" />
+                        <input placeholder="Language Name" name="LanguageName" value="@language.LanguageName" class="form-control mb-2" />
+                        <select name="LanguageLevel" class="form-control mb-2">
+                            @{
+                                var levels = new[] { "Beginner", "Intermediate", "Fluent", "Native" };
+                                foreach (var level in levels)
+                                {
+                                    var selected = language.LanguageLevel == level ? "selected=\"selected\"" : "";
+                                    @Html.Raw($"<option value=\"{level}\" {selected}>{level}</option>")
+                                }
+                            }
+                        </select>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteLanguage(@language.LanguageId, this)">Delete</button>
+                    </div>
+                }
+            </div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addLanguageInput()">+ Add Language</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('skills')">Back</button>
+                <button class="btn btn-success" onclick="submitLanguages()">Save & Next</button>
+            </div>
+        </div>
+        <!-- Certificates Tab -->
+        <div class="tab-pane fade" id="certificates" role="tabpanel" aria-labelledby="certificates-tab">
+            <div id="certificatesContainer">
+                @foreach (var cert in certificates)
+                {
+                    <div class="certificate-group mb-3 border p-3 rounded bg-light">
+                        <input type="hidden" name="ResumeId" value="@Model.ResumeId" />
+                        <input type="hidden" name="CertificateId" value="@cert.CertificateId" />
+                        <input placeholder="Certificate Name" name="TopicName" value="@cert.TopicName" class="form-control mb-2" />
+                        <input placeholder="Provider Name" name="ProviderName" value="@cert.ProviderName" class="form-control mb-2" />
+                        <input placeholder="Issued Date" name="IssuedDate" value="@cert.IssuedDate" type="date" class="form-control mb-2" />
+                        <input placeholder="Expiration Date" name="ExpirationDate" value="@cert.ExpirationDate" type="date" class="form-control mb-2" />
+                        <input placeholder="Certificate Url" name="CertificateUrl" value="@cert.CertificateUrl" type="url" class="form-control mb-2" />
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteCertificate(@cert.CertificateId, this)">Delete</button>
+                    </div>
+                }
+            </div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addCertificateInput()">+ Add Certificate</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('languages')">Back</button>
+                <button class="btn btn-primary" onclick="finishWizard()">Finish</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const resumeId = @Model.ResumeId;
+
+        function switchTab(tab) {
+                $('.nav-link').removeClass('active');
+        $('.tab-pane').removeClass('show active');
+
+        $(`#${tab}-tab`).addClass('active');
+        $(`#${tab}`).addClass('show active');
+        }
+
+        function addEducationInput() {
+            $('#educationContainer').append(`
+                 <div class="education-group mb-3 border p-3 rounded bg-light">
+                  <input type="hidden" id="ResumeId" value="@Model.ResumeId" />
+                  <input placeholder="University Name" name="UniversityName"   class="form-control mb-2" />
+                   <input placeholder="Degree Type" name="DegreeType"   class="form-control mb-2" />
+                   <input placeholder="Major" name="Major"  class="form-control mb-2" />
+                    <input placeholder="Start Date" name="StartDate"   type="date" class="form-control mb-2" />
+                    <input placeholder="End Date" name="EndDate"   type="date" class="form-control mb-2" />
+                     <input placeholder="GPA" name="GPA"   class="form-control mb-2" />
+                    </div>`);
+        }
+
+
+        function submitBasic() {
+            const data = {
+               ResumeId: resumeId,
+               FirstName: $('[name="FirstName"]').val(),
+                LastName: $('[name="LastName"]').val(),
+                Email: $('[name="Email"]').val(),
+                PhoneNumber: $('[name="PhoneNumber"]').val(),
+                Summary: $('[name="Summary"]').val(),
+                Address: $('[name="Address"]').val(),
+                Title: $('[name="Title"]').val(),
+                Link1: $('[name="Link1"]').val(),
+                Link2: $('[name="Link2"]').val(),
+                Link3: $('[name="Link3"]').val()
+            };
+
+            $.post('/Resume/UpdateBasicResume', data)
+                .done(() => switchTab('education'))
+                .fail(xhr => displayValidationError(xhr.responseText));
+        }
+
+        function submitEducations() {
+            const educations = $('.education-group').map(function () {
+                return {
+                     EducationId: parseInt($(this).find('[name="EducationId"]').val()) || 0,
+                      ResumeId: parseInt(resumeId),
+                     UniversityName :$(this).find('[name="UniversityName"]').val(),
+                    DegreeType: $(this).find('[name="DegreeType"]').val(),
+                    Major:$(this).find('[name="Major"]').val(),
+                    GPA :$(this).find('[name="GPA"]').val(),
+                    StartDate: $(this).find('[name="StartDate"]').val(),
+                    EndDate:$(this).find('[name="EndDate"]').val()
+                };
+            }).get();
+
+            $.ajax({
+                url: '/Resume/UpdateEducation',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(educations),
+                success: () => switchTab('experience'),
+                error: xhr => displayValidationError(xhr.responseText)
+            });
+        }
+
+
+
+        function displayValidationError(message) {
+            let summary = $('[asp-validation-summary="All"]');
+            summary.html(`<div class="alert alert-danger">${message}</div>`);
+        }
+
+            function deleteEducation(id, btn) {
+            if (id == 0) {
+                $(btn).closest('.education-group').remove(); // unsaved education
+                return;
+            }
+
+            if (!confirm("Are you sure you want to delete this education?")) return;
+
+            $.post('/Resume/DeleteEducation', { id })
+                .done(() => $(btn).closest('.education-group').remove())
+                .fail(xhr => displayValidationError("Could not delete education."));
+        }
+
+            function addExperienceInput() {
+            $('#experienceContainer').append(`
+                <div class="experience-group mb-3 border p-3 rounded bg-light">
+                    <input type="hidden" name="ExperienceId" value="0" />
+                    <input type="hidden" name="ResumeId" value="@Model.ResumeId" />
+                    <input placeholder="CompanyName" name="CompanyName" class="form-control mb-2" />
+                    <input placeholder="Position" name="Position" class="form-control mb-2" />
+                    <input placeholder="Start Date" name="StartDate" type="date" class="form-control mb-2" />
+                    <input placeholder="End Date" name="EndDate" type="date" class="form-control mb-2" />
+                    <textarea placeholder="Duties" name="Duties" class="form-control mb-2"></textarea>
+                </div>`);
+        }
+
+        function submitExperience() {
+            const data = $('.experience-group').map(function () {
+                return {
+                    ExperienceId: parseInt($(this).find('[name="ExperienceId"]').val()) || 0,
+                    ResumeId: resumeId,
+                    CompanyName: $(this).find('[name="CompanyName"]').val(),
+                    Position: $(this).find('[name="Position"]').val(),
+                    StartDate: $(this).find('[name="StartDate"]').val(),
+                    EndDate: $(this).find('[name="EndDate"]').val(),
+                    Duties : $(this).find('[name="Duties"]').val()
+                };
+            }).get();
+
+            $.ajax({
+                url: '/Resume/UpdateExperience',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: () => switchTab('skill'),
+                error: xhr => displayValidationError(xhr.responseText)
+            });
+        }
+
+        function deleteExperience(id, btn) {
+            if (id === 0) {
+                $(btn).closest('.experience-group').remove();
+                return;
+            }
+
+            if (!confirm("Are you sure you want to delete this experience?")) return;
+
+            $.post('/Resume/DeleteExperience', { id })
+                .done(() => $(btn).closest('.experience-group').remove())
+                .fail(() => displayValidationError("Could not delete experience."));
+        }
+        //skill
+            function addSkillInput() {
+            $('#skillsContainer').append(`
+                <div class="skill-group mb-3 border p-3 rounded bg-light">
+                    <input type="hidden" name="SkillId" value="0" />
+                    <input type="hidden" name="ResumeId" value="${resumeId}" />
+                    <input placeholder="Skill Name" name="SkillName" class="form-control mb-2" />
+                     <select name="SkillType" class="form-control mb-2">
+                <option value="Technical">Technical</option>
+                <option value="Soft">Soft</option>
+                <option value="Language">Language</option>
+                <option value="Management">Management</option>
+                <option value="Analytical">Analytical</option>
+                <option value="Creative">Creative</option>
+            </select>
+                </div>`);
+        }
+
+        function submitSkills() {
+            const data = $('.skill-group').map(function () {
+                return {
+                    SkillId: parseInt($(this).find('[name="SkillId"]').val()) || 0,
+                    ResumeId: resumeId,
+                    SkillName: $(this).find('[name="SkillName"]').val(),
+                    SkillType: $(this).find('[name="SkillType"]').val()
+                };
+            }).get();
+
+            $.ajax({
+                url: '/Resume/UpdateSkill',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: () => switchTab('language'),
+                error: xhr => displayValidationError(xhr.responseText)
+            });
+        }
+
+        function deleteSkill(id, btn) {
+            if (id === 0) {
+                $(btn).closest('.skill-group').remove();
+                return;
+            }
+
+            if (!confirm("Are you sure you want to delete this skill?")) return;
+
+            $.post('/Resume/DeleteSkill', { id })
+                .done(() => $(btn).closest('.skill-group').remove())
+                .fail(() => displayValidationError("Could not delete skill."));
+        }
+        //language
+            function addLanguageInput() {
+            $('#languagesContainer').append(`
+                <div class="language-group mb-3 border p-3 rounded bg-light">
+                    <input type="hidden" name="LanguageId" value="0" />
+                    <input type="hidden" name="ResumeId" value="${resumeId}" />
+                    <input placeholder="Language Name" name="LanguageName" class="form-control mb-2" />
+                     <select name="LanguageLevel" class="form-control mb-2">
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Fluent">Fluent</option>
+                <option value="Native">Native</option>
+            </select>
+                </div>`);
+        }
+
+        function submitLanguages() {
+            const data = $('.language-group').map(function () {
+                return {
+                    LanguageId: parseInt($(this).find('[name="LanguageId"]').val()) || 0,
+                    ResumeId: resumeId,
+                   LanguageName: $(this).find('[name="LanguageName"]').val(),
+                    LanguageLevel: $(this).find('[name="LanguageLevel"]').val()
+                };
+            }).get();
+
+            $.ajax({
+                url: '/Resume/UpdateLanguage',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: () => switchTab('certificates'),
+                error: xhr => displayValidationError(xhr.responseText)
+            });
+        }
+
+        function deleteLanguage(id, btn) {
+            if (id === 0) {
+                $(btn).closest('.language-group').remove();
+                return;
+            }
+
+            if (!confirm("Are you sure you want to delete this language?")) return;
+
+            $.post('/Resume/DeleteLanguage', { id })
+                .done(() => $(btn).closest('.language-group').remove())
+                .fail(() => displayValidationError("Could not delete language."));
+        }
+        //certificate
+                function addCertificateInput() {
+                $('#certificatesContainer').append(`
+                    <div class="certificate-group mb-3 border p-3 rounded bg-light">
+                        <input type="hidden" name="CertificateId" value="0" />
+                        <input type="hidden" name="ResumeId" value="${resumeId}" />
+                            <input placeholder="Certificate Name" name="TopicName" class="form-control mb-2" />
+                                <input placeholder="ProviderName" name="ProviderName" class="form-control mb-2" />
+                                    <input placeholder="IssuedDate" name="IssuedDate" type="date" class="form-control mb-2" />
+                                            <input placeholder="ExpirationDate" name="ExpirationDate" type="date" class="form-control mb-2" />
+                                                         <input placeholder="CertificateUrl" name="CertificateUrl" type="url" class="form-control mb-2" /> </div>`);
+
+            }
+
+             function submitCertificates() {
+            const data = $('.certificate-group').map(function () {
+                return {
+                    CertificateId: parseInt($(this).find('[name="CertificateId"]').val()) || 0,
+                    ResumeId: resumeId,
+                    TopicName: $(this).find('[name="TopicName"]').val(),
+                    ProviderName: $(this).find('[name="ProviderName"]').val(),
+                    IssuedDate: $(this).find('[name="IssuedDate"]').val(),
+                    ExpirationDate: $(this).find('[name="ExpirationDate"]').val(),
+                    CertificateUrl: $(this).find('[name="CertificateUrl"]').val()
+                };
+            }).get();
+
+            return $.ajax({
+                url: '/Resume/UpdateCertificate',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data)
+            });
+        }
+
+            function deleteCertificate(id, btn) {
+                if (id === 0) {
+                    $(btn).closest('.certificate-group').remove();
+                    return;
+                }
+
+                if (!confirm("Are you sure you want to delete this certificate?")) return;
+
+                $.post('/Resume/DeleteCertificate', { id })
+                    .done(() => $(btn).closest('.certificate-group').remove())
+                    .fail(() => displayValidationError("Could not delete certificate."));
+            }
+
+                function finishWizard() {
+            submitCertificates()
+                .done(() => {
+                    alert("Resume saved successfully!");
+                    window.location.href = '/Resume/Index';
+                })
+                .fail(xhr => displayValidationError(xhr.responseText));
+        }
+
+    </script>

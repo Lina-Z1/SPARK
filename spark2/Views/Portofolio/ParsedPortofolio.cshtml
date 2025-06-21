@@ -1,0 +1,108 @@
+﻿@using spark2.Models.Entities
+@model Portofolio
+
+@{
+         
+    ViewData["ShowSidebar"] = false;
+    ViewData["Title"] = "AI Portfolio";
+
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="row g-0">          
+            <div class="col-md-8">
+                <div class="card-body">
+                    @if (!string.IsNullOrWhiteSpace(Model.FullName))
+                    {
+                        <h3 class="card-title">@Model.FullName</h3>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Email))
+                    {
+                        <h5 class="card-title">@Model.Email</h5>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.JobTitle))
+                    {
+                        <h5 class="card-title">@Model.JobTitle</h5>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Address))
+                    {
+                        <p class="card-text text-muted">@Model.Address</p>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Bio))
+                    {
+                        <p class="card-text">@Model.Bio</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services -->
+    @if (Model.Services != null && Model.Services.Any())
+    {
+        <h4 class="mt-5">Services</h4>
+        <div class="row">
+            @foreach (var service in Model.Services)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">                      
+                        <div class="card-body">
+                            @if (!string.IsNullOrWhiteSpace(service.ServiceName))
+                            {
+                                <h5 class="card-title">@service.ServiceName</h5>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(service.ServiceDescription))
+                            {
+                                <p class="card-text">@service.ServiceDescription</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- Projects -->
+    @if (Model.Projects != null && Model.Projects.Any())
+    {
+        <h4 class="mt-5">Projects</h4>
+        <div class="row">
+            @foreach (var project in Model.Projects)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            @if (!string.IsNullOrWhiteSpace(project.ProjectName))
+                            {
+                                <h5 class="card-title">@project.ProjectName</h5>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(project.ProjectDescription))
+                            {
+                                <p class="card-text">@project.ProjectDescription</p>
+                            }
+
+                            @if (!string.IsNullOrEmpty(project.ProjectLink))
+                            {
+                                <a href="@project.ProjectLink" class="btn btn-sm btn-outline-primary" target="_blank">View Project</a>
+                            }
+
+                            @if (!string.IsNullOrEmpty(project.ProjectAttachment))
+                            {
+                                <a href="@project.ProjectAttachment" class="btn btn-sm btn-outline-secondary ms-2" download>Download Attachment</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <a href="/Portofolio/Index" class="btn btn-secondary mt-3">Back to List</a>
+</div>

@@ -1,0 +1,18 @@
+﻿ @page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="container pt-0 mt-0 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="text-center pt-0 mt-0">
+        <div class="mb-4">
+            <i class="bi bi-shield-lock-fill text-danger display-1"></i>
+        </div>
+        <h1 class="text-danger display-5 fw-bold">@ViewData["Title"]</h1>
+        <p class="lead text-muted">You do not have permission to view this page</p>       
+        <a href="/" class="btn btn-outline-danger mt-3">
+            Home Page
+        </a>
+    </div>
+</div>

@@ -1,0 +1,359 @@
+﻿@using spark2.Models.DTOs
+@model PortofolioDTO
+
+@{
+    ViewData["Title"] = "Edit Portfolio";
+}
+
+<div class="container">
+    <h2 class="mb-2">Edit Portfolio</h2>
+    <div id="basic-info-section" class="">
+        <h5 class="mb-2 text-danger">Basic Information</h5>
+        <form id="basic-info-form" enctype="multipart/form-data" method="post" class="row g-3">
+            <input type="hidden" name="PortofolioId" value="@Model.PortofolioId" />
+
+            <div class="col-md-6">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" name="FullName" value="@Model.FullName" required />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="Email" value="@Model.Email" required />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Job Title</label>
+                <input type="text" class="form-control" name="JobTitle" value="@Model.JobTitle" />
+            </div>
+            <div class="col-12">
+                <label class="form-label">Bio</label>
+                <textarea class="form-control" name="Bio" rows="3">@Model.Bio</textarea>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" name="Address" value="@Model.Address" />
+            </div>
+            <div class="col-md-6">
+
+                @* <div class="mb-2"> *@
+                @*     <img id="PersonalImagePreview" *@
+                @*          src="data:Image/*;base64,@(Convert.ToBase64String(Model.PersonalImage))" *@
+                @*          class="img-thumbnail" *@
+                @*          style="max-height: 150px;" />                   *@
+                @* </div> *@
+                @if (Model.PersonalImage != null)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(Model.PersonalImage)" alt="Profile Image" class="img-fluid rounded" style="max-height: 150px;" />
+                }
+                else
+                {
+                     <img src="/images/portfolioImg"/>
+                }
+
+              
+                <input type="file" class="form-control" name="PersonalImageFile" accept="image/.jpg,.jpeg,.png"
+                onchange="document.getElementById('PersonalImagePreview').src = window.URL.createObjectURL(this.files[0])" />
+            </div>    
+          
+            <div class="col-12">
+                <button type="submit" class="btn btn-danger">Save Basic Info</button>
+            </div>
+        </form>
+    </div>
+
+    <hr />
+
+    <div id="services-section" class="">
+        <h5 class="mb-2 text-danger">Services</h5>
+        <div id="services-list" class="row g-3">
+            @foreach (var service in (List<spark2.Models.DTOs.ServiceDTO>)ViewBag.Services)
+            {        
+                <div class="col-12">
+                    <div class="card shadow-sm service-item" data-service-id="@service.ServiceId" >
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">
+                                <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#service-collapse-@service.ServiceId" aria-expanded="false">
+                                    @service.ServiceName
+                                </button>
+                            </h6>
+                            <div>
+                                <button class="btn btn-success btn-sm save-service-btn">Save</button>
+                                <button class="btn btn-outline-danger btn-sm delete-service-btn">Delete</button>
+                            </div>
+                        </div>
+
+                        <div id="service-collapse-@service.ServiceId" class="collapse">
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <label class="form-label">Service Name</label>
+                                    <input type="text" class="form-control service-name" value="@service.ServiceName" />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control service-description">@service.ServiceDescription</textarea>
+                                </div>
+                                <div class="mb-2">
+                                    <input type="file" class="form-control service-image-file" accept=".jpg,.jpeg,.png" /> 
+                                 
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+            }
+        </div>
+        <button id="add-service-btn" class="btn btn-outline-primary mt-3">Add New Service</button>
+    </div>
+
+    <hr />
+
+    <div id="projects-section">
+        <h5 class="mb-3 text-danger">Projects</h5>
+        <div id="projects-list" class="row g-3">          
+
+            @foreach (var project in (List<spark2.Models.DTOs.ProjectDTO>)ViewBag.Projects)
+            {
+                <div class="card shadow-sm project-item" data-project-id="@project.ProjectId">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">
+                            <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#project-collapse-@project.ProjectId" aria-expanded="false">
+                                @project.ProjectName
+                            </button>
+                        </h6>
+                        <div>
+                            <button class="btn btn-success btn-sm save-project-btn">Save</button>
+                            <button class="btn btn-outline-danger btn-sm delete-project-btn">Delete</button>
+                        </div>
+                    </div>
+                    <div id="project-collapse-@project.ProjectId" class="collapse">
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <label class="form-label">Project Name</label>
+                                <input type="text" class="form-control project-name" value="@project.ProjectName" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control project-description">@project.ProjectDescription</textarea>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Project Link</label>
+                                <input type="url" class="form-control project-link" value="@project.ProjectLink" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Attachment</label>
+                                <input type="text" class="form-control project-attachment" value="@project.ProjectAttachment" />
+                            </div>
+                            <div class="mb-2">
+                                <input type="file" class="form-control project-image-file" accept=".jpg,.jpeg,.png" />
+                                                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+        <button id="add-project-btn" class="btn btn-outline-primary mt-3">Add New Project</button>
+    </div>
+</div>
+
+
+@section Scripts { 
+
+    <script>
+        $(function() {
+            // Handle basic info form submit
+            $('#basic-info-form').submit(function(e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: '@Url.Action("UpdateBasicPortofolio")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function() {
+                        alert('Basic info saved!');
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            // Save service
+            $('#services-list').on('click', '.save-service-btn', function() {
+                var container = $(this).closest('.service-item');
+                var serviceId = container.data('service-id');
+                var serviceName = container.find('.service-name').val();
+                var serviceDescription = container.find('.service-description').val();
+                var fileInput = container.find('.service-image-file')[0];
+
+                var formData = new FormData();
+                formData.append('ServiceId', serviceId);
+                formData.append('PortofolioId', '@Model.PortofolioId');
+                formData.append('ServiceName', serviceName);
+                formData.append('ServiceDescription', serviceDescription);
+
+                if (fileInput.files.length > 0) {
+                    formData.append('ServiceImageFile', fileInput.files[0]);
+                }
+
+                $.ajax({
+                    url: '@Url.Action("UpdateService")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(id) {
+                        alert('Service saved!');
+                        if(serviceId == 0) container.attr('data-service-id', id);
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            // Delete service
+            $('#services-list').on('click', '.delete-service-btn', function() {
+                if (!confirm('Are you sure to delete this service?')) return;
+
+                var container = $(this).closest('.service-item');
+                var serviceId = container.data('service-id');
+
+                $.ajax({
+                    url: '@Url.Action("DeleteService")',
+                    type: 'POST',
+                    data: { id: serviceId },
+                    success: function() {
+                        container.remove();
+                    },
+                    error: function() {
+                        alert('Failed to delete service');
+                    }
+                });
+            });         
+
+             $('#add-service-btn').click(function () {
+            var newServiceHtml = `
+            <div class="col-12">
+                <div class="card p-3 shadow-sm service-item" data-service-id="0">
+                    <div class="mb-2">
+                        <label class="form-label">Service Name</label>
+                        <input type="text" class="form-control service-name" placeholder="Service Name" />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control service-description" placeholder="Description"></textarea>
+                    </div>
+                    <div class="mb-2">
+                        <input type="file" class="form-control service-image-file" accept=".jpg,.jpeg,.png" />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-success save-service-btn">Save</button>
+                        <button class="btn btn-outline-danger delete-service-btn">Delete</button>
+                    </div>
+                </div>
+            </div>`;
+            $('#services-list').append(newServiceHtml);
+        });
+
+            // Save project
+            $('#projects-list').on('click', '.save-project-btn', function() {
+                var container = $(this).closest('.project-item');
+                var projectId = container.data('project-id');
+                var projectName = container.find('.project-name').val();
+                var projectDescription = container.find('.project-description').val();
+                var projectLink = container.find('.project-link').val();
+                var projectAttachment = container.find('.project-attachment').val();
+                var fileInput = container.find('.project-image-file')[0];
+
+                var formData = new FormData();
+                formData.append('ProjectId', projectId);
+                formData.append('PortofolioId', '@Model.PortofolioId');
+                formData.append('ProjectName', projectName);
+                formData.append('ProjectDescription', projectDescription);
+                formData.append('ProjectLink', projectLink);
+                formData.append('ProjectAttachment', projectAttachment);
+
+                if (fileInput.files.length > 0) {
+                    formData.append('ProjectImageFile', fileInput.files[0]);
+                }
+
+                $.ajax({
+                    url: '@Url.Action("UpdateProject")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(id) {
+                        alert('Project saved!');
+                        if(projectId == 0) container.attr('data-project-id', id);
+                    },
+                    error: function(xhr) {
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            // Delete project
+            $('#projects-list').on('click', '.delete-project-btn', function() {
+                if (!confirm('Are you sure to delete this project?')) return;
+
+                var container = $(this).closest('.project-item');
+                var projectId = container.data('project-id');
+
+                $.ajax({
+                    url: '@Url.Action("DeleteProject")',
+                    type: 'POST',
+                    data: { id: projectId },
+                    success: function() {
+                        container.remove();
+                    },
+                    error: function() {
+                        alert('Failed to delete project');
+                    }
+                });
+            });                  
+
+
+              $('#add-project-btn').click(function () {
+            var newProjectHtml = `
+            <div class="col-12">
+                <div class="card p-3 shadow-sm project-item" data-project-id="0">
+                    <div class="mb-2">
+                        <label class="form-label">Project Name</label>
+                        <input type="text" class="form-control project-name" placeholder="Project Name" />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control project-description" placeholder="Description"></textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Project Link</label>
+                        <input type="url" class="form-control project-link" placeholder="Link" />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Attachment</label>
+                        <input type="text" class="form-control project-attachment" placeholder="Attachment" />
+                    </div>
+                    <div class="mb-2">
+                        <input type="file" class="form-control project-image-file" accept=".jpg,.jpeg,.png" />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-success save-project-btn">Save</button>
+                        <button class="btn btn-outline-danger delete-project-btn">Delete</button>
+                    </div>
+                </div>
+            </div>`;
+            $('#projects-list').append(newProjectHtml);
+        });
+
+        });
+    </script>
+}
+

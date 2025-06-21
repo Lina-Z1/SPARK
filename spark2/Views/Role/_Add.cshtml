@@ -1,0 +1,14 @@
+﻿@model RoleDTO
+
+<h5 hidden>Add Role</h5>
+
+<form method="post" asp-action="Add" asp-controller="Role">
+
+    <div class="input-group mp-4">
+        <input type="text" class="form-control" asp-for="RoleName" placeholder="Enter Role Name ...." />
+        <button type="submit" class="btn btn-danger">Add New Role</button>
+    </div>
+    <span asp-validation-for="RoleName" class="text-danger"></span>
+
+</form>
+

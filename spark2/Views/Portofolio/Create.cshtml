@@ -1,0 +1,269 @@
+﻿@using spark2.Models.DTOs
+@model PortofolioDTO
+
+@{
+
+    ViewData["ShowSidebar"] = false;
+    ViewData["Title"] = "Create Portfolios";
+}
+
+
+<div class="container mt-1">
+    <h2>Create Portfolio </h2>
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs" id="wizardTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab">Basic Info</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link disabled" id="services-tab" data-bs-toggle="tab" data-bs-target="#services" type="button" role="tab">Services</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link disabled" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects" type="button" role="tab">Projects</button>
+        </li>
+    </ul>
+
+    <!-- Tabs Content -->
+    <div class="tab-content mt-3">     
+        <div class="tab-pane fade show active" id="basic" role="tabpanel">
+            <form id="basicForm" method="post" enctype="multipart/form-data" novalidate class="mb-2">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FullName">Full Name<span class="text-danger">*</span></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Email">Email<span class="text-danger">*</span></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="JobTitle">Job Title<span class="text-danger">*</span></label>
+                        <input asp-for="JobTitle" class="form-control" />
+                        <span asp-validation-for="JobTitle" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Bio">Bio<span class="text-danger">*</span></label>
+                        <textarea asp-for="Bio" class="form-control"></textarea>
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                    </div>                  
+
+                    <div class="col-md-6 mb-3">
+                        <label>Personal Image <span class="text-danger">*</span></label>
+                        <div class="mb-2">
+                            <img id="PersonalImagePreview"
+                                 src="~/images/portfolioImg.jpg"
+                                 alt="No image Added"
+                                 class="img-thumbnail"
+                                 style="max-height: 150px;" />
+                        </div>
+                        <input type="file" name="PersonalImageFile" class="form-control" accept="image/*"
+                               onchange="document.getElementById('PersonalImagePreview').src = window.URL.createObjectURL(this.files[0])" />
+                       
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Address">Address</label>
+                        <input asp-for="Address" class="form-control" />
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="submitBasic()">Save & Next</button>
+            </form>
+        </div>
+
+
+        <!-- Services Tab -->
+        <div class="tab-pane fade mb-3" id="services" role="tabpanel">
+            <input type="hidden" id="PortofolioId" />
+            <div id="servicesContainer"></div>
+            <button type="button" class="btn btn-outline-secondary mb-3" onclick="addServiceInput()">+ Add Another Service</button>
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" onclick="switchTab('basic')">Back</button>
+                <button type="button" class="btn btn-success" onclick="submitServices()">Save & Next</button>
+            </div>           
+        </div>
+
+        <!-- Projects Tab -->
+        <div class="tab-pane fade mb-3" id="projects" role="tabpanel">
+            <div id="projectsContainer"></div>
+            <button type="button" class="btn btn-outline-secondary mb-3" onclick="addProjectInput()">+ Add Another Project</button>
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" onclick="switchTab('services')">Back</button>
+                <button type="button" class="btn btn-primary" onclick="submitProjects()">Finish</button>
+            </div>          
+        </div>
+    </div>
+</div>
+
+<script>
+    let portofolioId = 0;
+
+    function switchTab(id) {
+        $('#wizardTabs .nav-link').removeClass('active').addClass('disabled');
+        $(`#${id}-tab`).removeClass('disabled').addClass('active');
+        $('.tab-pane').removeClass('show active');
+        $(`#${id}`).addClass('show active');
+    }
+
+    function addServiceInput() {
+        const html = `
+            <div class="service-group mb-3 border p-3 rounded bg-light">
+                <input type="text" class="form-control mb-2" placeholder="Service Name" name="ServiceName" />
+                <input type="text" class="form-control mb-2" placeholder="Service Description" name="ServiceDescription" />
+
+                <div class="mb-2">
+                <img src="~/images/service1.jpg" class="img-thumbnail service-preview" style="max-height: 100px;" />
+            </div>
+            <input type="file" class="form-control mb-2" name="ServiceImageFile"
+                   accept="image/*"
+                   onchange="this.previousElementSibling.firstElementChild.src = window.URL.createObjectURL(this.files[0])" />
+
+
+            </div>`;
+        $('#servicesContainer').append(html);
+    }
+
+    function addProjectInput() {
+        const html = `
+            <div class="project-group mb-3 border p-3 rounded bg-light">
+                <input type="text" class="form-control mb-2" placeholder="Project Name" name="ProjectName" />
+                <textarea class="form-control mb-2" placeholder="Project Description" name="ProjectDescription"></textarea>
+                <input type="text" class="form-control mb-2" placeholder="Project Link" name="ProjectLink" />
+                <input type="text" class="form-control mb-2" placeholder="Project Attachment URL" name="ProjectAttachment" />
+
+                <div class="mb-2">
+                <img src="~/images/default-project.jpg" class="img-thumbnail project-preview" style="max-height: 100px;" />
+            </div>
+            <input type="file" class="form-control mb-2" name="ProjectImageFile"
+                   accept="image/*"
+                   onchange="this.previousElementSibling.firstElementChild.src = window.URL.createObjectURL(this.files[0])" />
+            </div>`;
+        $('#projectsContainer').append(html);
+    }
+
+
+        function submitBasic() {
+                if (!$('#basicForm').valid()) {
+        return;
+    }
+        const form = document.getElementById('basicForm');
+        const formData = new FormData(form);
+
+        $.ajax({
+            url: '/Portofolio/CreateBasicPortofolio',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (id) {
+                portofolioId = id;
+                $('#PortofolioId').val(id);
+                switchTab('services');
+            },
+            error: function (xhr) {
+                alert('Error: ' + xhr.responseText);
+            }
+        });
+    }
+
+      function submitServices() {
+        const serviceGroups = $('#servicesContainer .service-group');
+        let posted = 0;
+
+        serviceGroups.each(function () {
+            const formData = new FormData();
+            formData.append("ServiceName", $(this).find('[name="ServiceName"]').val());
+            formData.append("ServiceDescription", $(this).find('[name="ServiceDescription"]').val());
+            formData.append("PortofolioId", portofolioId);
+
+            const fileInput = $(this).find('[name="ServiceImageFile"]')[0];
+            if (fileInput && fileInput.files.length > 0) {
+                formData.append("ServiceImageFile", fileInput.files[0]);
+            }
+
+            $.ajax({
+                url: '/Portofolio/AddService',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    posted++;
+                    if (posted === serviceGroups.length) {
+                        switchTab('projects');
+                    }
+                },
+                error: function (xhr) {
+                    alert('Service Error: ' + xhr.responseText);
+                }
+            });
+        });
+    }
+
+     function submitProjects() {
+        const projectGroups = $('#projectsContainer .project-group');
+        let posted = 0;
+
+        if (projectGroups.length === 0) {
+            finishWizard();
+            return;
+        }
+
+        projectGroups.each(function () {
+            const formData = new FormData();
+            formData.append("ProjectName", $(this).find('[name="ProjectName"]').val());
+            formData.append("ProjectDescription", $(this).find('[name="ProjectDescription"]').val());
+            formData.append("ProjectLink", $(this).find('[name="ProjectLink"]').val());
+            formData.append("ProjectAttachment", $(this).find('[name="ProjectAttachment"]').val());
+            formData.append("PortofolioId", portofolioId);
+
+            const fileInput = $(this).find('[name="ProjectImageFile"]')[0];
+            if (fileInput && fileInput.files.length > 0) {
+                formData.append("ProjectImageFile", fileInput.files[0]);
+            }
+
+            $.ajax({
+                url: '/Portofolio/AddProject',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    posted++;
+                    if (posted === projectGroups.length) {
+                        finishWizard();
+                    }
+                },
+                error: function (xhr) {
+                    alert('Project Error: ' + xhr.responseText);
+                }
+            });
+        });
+    }
+    function finishWizard() {
+        alert('Portfolio created successfully!');
+        window.location.href = '/Portofolio/Index';
+    }
+    $(document).ready(function () {
+        addServiceInput();
+        addProjectInput();
+    });
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+
+

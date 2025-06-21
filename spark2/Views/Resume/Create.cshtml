@@ -1,0 +1,360 @@
+﻿@model spark2.Models.DTOs.ResumeDTO
+
+@{
+    
+    ViewData["ShowSidebar"] = false;
+    ViewData["Title"] = "Create Portfolio";
+}
+
+<div class="container mt-2">
+    <h2>Create Resume </h2>
+    <ul class="nav nav-tabs" id="resumeTabs" role="tablist">
+        <li class="nav-item"><button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button">Basic Info</button></li>
+        <li class="nav-item"><button class="nav-link disabled" id="education-tab" data-bs-toggle="tab" data-bs-target="#education" type="button">Education</button></li>
+        <li class="nav-item"><button class="nav-link disabled" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience" type="button">Experience</button></li>
+        <li class="nav-item"><button class="nav-link disabled" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills" type="button">Skills</button></li>
+        <li class="nav-item"><button class="nav-link disabled" id="languages-tab" data-bs-toggle="tab" data-bs-target="#languages" type="button">Languages</button></li>
+        <li class="nav-item"><button class="nav-link disabled" id="certificates-tab" data-bs-toggle="tab" data-bs-target="#certificates" type="button">Certificates</button></li>
+    </ul>
+
+    <div class="tab-content mt-1">   
+        <div class="tab-pane fade show active" id="basic" role="tabpanel">
+            <form id="basicForm">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="FirstName">First Name<span class="text-danger">*</span></label>
+                        <input asp-for="FirstName" class="form-control" required />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Last Name</label>
+                        <input name="LastName" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Email">Email<span class="text-danger">*</span></label>
+                        <input asp-for="Email" class="form-control" type="email" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Phone</label>
+                        <input name="PhoneNumber" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Title</label>
+                        <input name="Title" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Address</label>
+                        <input name="Address" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Link1">Link1</label>
+                        <input asp-for="Link1" class="form-control" />
+                        <span asp-validation-for="Link1" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Link2">Link2</label>
+                        <input asp-for="Link2" class="form-control" />
+                        <span asp-validation-for="Link2" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Link3">Link3</label>
+                        <input asp-for="Link3" class="form-control" />
+                        <span asp-validation-for="Link3" class="text-danger"></span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label>Summary</label>
+                        <textarea name="Summary" class="form-control"></textarea>
+                    </div>                  
+                </div>
+                <button type="button" class="btn btn-primary" onclick="submitBasic()">Save & Next</button>
+            </form>
+           
+        </div>
+
+        <!-- Education Tab -->
+        <div class="tab-pane fade " id="education" role="tabpanel">
+            <input type="hidden" id="ResumeId" />
+            <div id="educationContainer"></div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addEducationInput()">+ Add Education</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('basic')">Back</button>
+                <button class="btn btn-success" onclick="submitEducation()">Save & Next</button>
+            </div>           
+        </div>
+
+        <!-- Experience Tab -->
+        <div class="tab-pane fade" id="experience" role="tabpanel">
+            <div id="experienceContainer"></div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addExperienceInput()">+ Add Experience</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('education')">Back</button>
+                <button class="btn btn-success" onclick="submitExperience()">Save & Next</button>
+            </div>         
+        </div>
+
+        <!-- Skills Tab -->
+        <div class="tab-pane fade" id="skills" role="tabpanel">
+            <div id="skillsContainer"></div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addSkillInput()">+ Add Skill</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('experience')">Back</button>
+                <button class="btn btn-success" onclick="submitSkills()">Save & Next</button>
+            </div>           
+        </div>
+
+        <!-- Languages Tab -->
+        <div class="tab-pane fade" id="languages" role="tabpanel">
+            <div id="languagesContainer"></div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addLanguageInput()">+ Add Language</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('skills')">Back</button>
+                <button class="btn btn-success" onclick="submitLanguages()">Save & Next</button>
+            </div>           
+        </div>
+
+        <!-- Certificates Tab -->
+        <div class="tab-pane fade" id="certificates" role="tabpanel">
+            <div id="certificatesContainer"></div>
+            <button class="btn btn-outline-secondary mb-3" onclick="addCertificateInput()">+ Add Certificate</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="switchTab('languages')">Back</button>
+                <button class="btn btn-primary" onclick="finishWizard()">Finish</button>
+            </div>
+        </div>
+    </div>   
+</div>
+ 
+<script>
+    let resumeId = 0;
+
+    function switchTab(id) {
+        $('#resumeTabs .nav-link').removeClass('active').addClass('disabled');
+        $(`#${id}-tab`).removeClass('disabled').addClass('active');
+        $('.tab-pane').removeClass('show active');
+        $(`#${id}`).addClass('show active');
+    }
+
+    function submitBasic() {
+        const data = {
+            FirstName: $('[name="FirstName"]').val(),
+            LastName: $('[name="LastName"]').val(),
+            Email: $('[name="Email"]').val(),
+            PhoneNumber: $('[name="PhoneNumber"]').val(),
+            Summary: $('[name="Summary"]').val(),
+            Address: $('[name="Address"]').val(),
+            Title: $('[name="Title"]').val()
+        };
+
+        $.post('/Resume/CreateBasicResume', data, function (id) {
+            resumeId = id;
+            $('#ResumeId').val(id);
+            switchTab('education');
+        }).fail(xhr => {
+            alert('Error: ' + xhr.responseText);
+        });
+    }
+
+    function addEducationInput() {
+        const html = `
+            <div class="education-group border p-3 mb-3 bg-light rounded">
+                <input placeholder="University Name" name="UniversityName" class="form-control mb-2" />
+                <input placeholder="Degree Type" name="DegreeType" class="form-control mb-2" />
+                <input placeholder="Major" name="Major" class="form-control mb-2" />
+                <input placeholder="Start Date" name="StartDate" type="date" class="form-control mb-2" />
+                <input placeholder="End Date" name="EndDate" type="date" class="form-control mb-2" />
+                <input placeholder="GPA" name="GPA" class="form-control mb-2" />
+            </div>`;
+        $('#educationContainer').append(html);
+    }
+
+    function submitEducation() {
+        const groups = $('#educationContainer .education-group').map(function () {
+            return {
+                UniversityName: $(this).find('[name="UniversityName"]').val(),
+                DegreeType: $(this).find('[name="DegreeType"]').val(),
+                Major: $(this).find('[name="Major"]').val(),
+                StartDate: $(this).find('[name="StartDate"]').val(),
+                EndDate: $(this).find('[name="EndDate"]').val(),
+                GPA: $(this).find('[name="GPA"]').val(),
+                ResumeId: resumeId
+            };
+        }).get();
+
+        if (groups.length === 0) {
+            switchTab('experience');
+            return;
+        }
+
+        let posted = 0;
+        groups.forEach(g => {
+            $.post('/Resume/AddEducation', g, () => {
+                posted++;
+                if (posted === groups.length) switchTab('experience');
+            }).fail(xhr => alert('Education Error: ' + xhr.responseText));
+        });
+    }
+
+    function addExperienceInput() {
+        $('#experienceContainer').append(`
+            <div class="experience-group border p-3 mb-3 bg-light rounded">
+                <input placeholder="Company Name" name="CompanyName" class="form-control mb-2" />
+                <input placeholder="Position" name="Position" class="form-control mb-2" />
+                <input placeholder="Start Date" name="StartDate" type="date" class="form-control mb-2" />
+                <input placeholder="End Date" name="EndDate" type="date" class="form-control mb-2" />
+                <textarea placeholder="Duties" name="Duties" class="form-control mb-2"></textarea>
+            </div>`);
+    }
+
+    function submitExperience() {
+        const groups = $('#experienceContainer .experience-group').map(function () {
+            return {
+                CompanyName: $(this).find('[name="CompanyName"]').val(),
+                Position: $(this).find('[name="Position"]').val(),
+                StartDate: $(this).find('[name="StartDate"]').val(),
+                EndDate: $(this).find('[name="EndDate"]').val(),
+                Responsibilities: $(this).find('[name="Responsibilities"]').val(),
+                ResumeId: resumeId
+            };
+        }).get();
+
+        if (groups.length === 0) return switchTab('skills');
+
+        let posted = 0;
+        groups.forEach(g => {
+            $.post('/Resume/AddExperience', g, () => {
+                posted++;
+                if (posted === groups.length) switchTab('skills');
+            }).fail(xhr => alert('Experience Error: ' + xhr.responseText));
+        });
+    }
+      
+
+        function addSkillInput() {
+        const html = `
+            <div class="skill-group mb-3 border p-3 rounded bg-light">
+                <input placeholder="Skill Name" name="SkillName" class="form-control mb-2" />
+                <select name="SkillType" class="form-select mb-2">
+                    <option value="">-- Select Skill Type --</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Soft">Soft</option>
+                    <option value="Language">Language</option>
+                    <option value="Management">Management</option>
+                    <option value="Analytical">Analytical</option>
+                    <option value="Creative">Creative</option>           
+                   </select>
+            </div>`;
+        $('#skillsContainer').append(html);
+    }
+      
+
+        function submitSkills() {
+        const skills = $('#skillsContainer .skill-group').map(function () {
+            const name = $(this).find('[name="SkillName"]').val().trim();
+            const type = $(this).find('[name="SkillType"]').val().trim();
+
+            if (name) {
+              return { SkillName: name, SkillType: type, ResumeId: resumeId };
+            }
+        }).get().filter(Boolean);  
+
+        if (skills.length === 0) return switchTab('languages');
+
+        let posted = 0;
+        skills.forEach(s => {
+            $.post('/Resume/AddSkill', s, () => {
+                posted++;
+                if (posted === skills.length) switchTab('languages');
+            }).fail(xhr => alert('Skill Error: ' + xhr.responseText));
+        });
+    }
+
+        function addLanguageInput() {
+        const html = `
+            <div class="language-group border p-3 mb-3 bg-light rounded">
+                <input placeholder="Language Name" name="LanguageName" class="form-control mb-2" />
+                <select name="LanguageLevel" class="form-select mb-2">
+                    <option value="">-- Select Proficiency Level --</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Fluent">Fluent</option>
+                    <option value="Native">Native</option>
+                </select>
+            </div>`;
+        $('#languagesContainer').append(html);
+    }
+
+        function submitLanguages() {
+        const langs = $('#languagesContainer .language-group').map(function () {
+            const name = $(this).find('[name="LanguageName"]').val().trim();
+            const level = $(this).find('[name="LanguageLevel"]').val().trim();
+
+            if (name) {
+                return {
+                    LanguageName: name,
+                    LanguageLevel: level,
+                    ResumeId: resumeId
+                };
+            }
+        }).get().filter(Boolean);  
+
+        if (langs.length === 0) return switchTab('certificates');
+
+        let posted = 0;
+        langs.forEach(l => {
+            $.post('/Resume/AddLanguage', l, () => {
+                posted++;
+                if (posted === langs.length) switchTab('certificates');
+            }).fail(xhr => alert('Language Error: ' + xhr.responseText));
+        });
+    }
+
+
+
+        function addCertificateInput() {
+        $('#certificatesContainer').append(`
+            <div class="certificate-group border p-3 mb-3 bg-light rounded">
+                <input placeholder="Certificate Name" name="CertificateName" class="form-control mb-2" />
+                <input placeholder="Organization" name="Organization" class="form-control mb-2" />
+                <input placeholder="Issue Date" name="IssueDate" type="date" class="form-control mb-2" />
+                <input placeholder="Expiration Date" name="ExpirationDate" type="date" class="form-control mb-2" />
+                <input placeholder="Certificate URL" name="CertificateUrl" type="url" class="form-control mb-2" />
+            </div>`);
+    }
+    function finishWizard() {
+        const certs = $('#certificatesContainer .certificate-group').map(function () {
+            return {
+                TopicName: $(this).find('[name="CertificateName"]').val(),
+                ProviderName: $(this).find('[name="Organization"]').val(),
+                IssuedDate: $(this).find('[name="IssueDate"]').val(),
+                ExpirationDate: $(this).find('[name="ExpirationDate"]').val(),
+                CertificateUrl: $(this).find('[name="CertificateUrl"]').val(),
+                ResumeId: resumeId
+            };
+        }).get();
+
+        if (certs.length === 0) return complete();
+
+        let posted = 0;
+        certs.forEach(c => {
+            $.post('/Resume/AddCertificate', c, () => {
+                posted++;
+                if (posted === certs.length) complete();
+            }).fail(xhr => alert('Certificate Error: ' + xhr.responseText));
+        });
+    }
+
+    function complete() {
+        alert('Resume Created Successfully!');
+        window.location.href = '/Resume/Index';
+    }
+
+    $(document).ready(function () {
+        addEducationInput();
+        addExperienceInput();
+        addSkillInput();
+        addLanguageInput();
+        addCertificateInput();
+    });
+</script>

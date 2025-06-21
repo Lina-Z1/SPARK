@@ -1,0 +1,59 @@
+﻿ @model UserDTO
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container py-3">
+    <div class="bg-white p-4 rounded-4 shadow-sm mx-auto" style="max-width: 800px;">
+        <div class="row g-4 align-items-center">
+                        
+            <div class="col-lg-6">
+                <div class="text-start">
+
+                    <p class="mb-2">
+                        <strong class="text-uppercase small text-muted">First Name</strong><br />
+                        <span>@Model.FirstName</span>
+                    </p>
+
+                    <p class="mb-2">
+                        <strong class="text-uppercase small text-muted">Last Name</strong><br />
+                        <span>@Model.LastName</span>
+                    </p>
+
+                    <p class="mb-2">
+                        <strong class="text-uppercase small text-muted">Email</strong><br />
+                        <span>@Model.Email</span>
+                    </p>
+
+                    <p class="mb-2">
+                        <strong class="text-uppercase small text-muted">Phone Number</strong><br />
+                        <span>@Model.PhoneNumber</span>
+                    </p>
+
+                    <p class="mb-3">
+                        <strong class="text-uppercase small text-muted">Role</strong><br />
+                        <span>@Model.Role</span>
+                    </p>
+
+                    <a asp-action="Index" class="btn btn-danger w-100 rounded-3 fw-bold py-2">
+                        Back to List
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 d-flex justify-content-center">
+                <div style="width: 100%; max-width: 400px; height: 330px; overflow: hidden; border-radius: 0.5rem;">
+                    <img src="@(Model.ProfilePicture != null
+                            ? $"data:image/*;base64,{Convert.ToBase64String(Model.ProfilePicture)}"
+                            : Url.Content("~/images/ProfilePicture.jpg"))"
+                         alt="Profile Picture"
+                         class="w-100 h-100"
+                         style="object-fit: cover; border-radius: 0.5rem;" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

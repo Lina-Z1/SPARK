@@ -1,0 +1,171 @@
+﻿@model spark2.Models.Entities.Resume
+
+@{
+
+    ViewData["ShowSidebar"] = false;
+    ViewData["Title"] = "AI Resume";
+
+}
+
+
+<h1>@Model.FirstName @Model.LastName</h1>
+@if (!string.IsNullOrWhiteSpace(Model.Title))
+{
+    <p><strong>@Model.Title</strong> </p>
+}
+
+<div class="section">
+    <h3>Contact Information</h3>
+    <ul>
+        @if (!string.IsNullOrWhiteSpace(Model.Email))
+        {
+            <li>Email: @Model.Email</li>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+        {
+            <li>Phone: @Model.PhoneNumber</li>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Address))
+        {
+            <li>Address: @Model.Address</li>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Link1))
+        {
+            <li>Link: @Model.Link1</li>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Link2))
+        {
+            <li>Link: @Model.Link2</li>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Link3))
+        {
+            <li>Link: @Model.Link3</li>
+        }
+    </ul>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.Summary) && Model.Summary.ToLower() != "not provided")
+{
+    <div class="section">
+        <h3>Professional Summary</h3>
+        <p>@Model.Summary</p>
+    </div>
+}
+
+@if (Model.Educations?.Any() == true)
+{
+    <div class="section">
+        <h3>Education</h3>
+        @foreach (var edu in Model.Educations)
+        {
+            <div class="entry">
+                @if (!string.IsNullOrWhiteSpace(edu.UniversityName))
+                {
+                    <strong>@edu.UniversityName</strong>
+
+                    <br />
+                }
+                @if (!string.IsNullOrWhiteSpace(edu.DegreeType))
+                {
+                    <span>@edu.DegreeType</span>
+                    <br />
+                }
+                @if (!string.IsNullOrWhiteSpace(edu.StartDate) || !string.IsNullOrWhiteSpace(edu.EndDate))
+                {
+                    <span class="small-text">@edu.StartDate - @edu.EndDate</span>
+
+                    <br />
+                }
+                @if (!string.IsNullOrWhiteSpace(edu.Major))
+                {
+                    <div>Major: @edu.Major</div>               }
+
+                <div>GPA: @edu.GPA</div>
+
+            </div>
+        }
+    </div>
+}
+
+@if (Model.Experiences?.Any() == true)
+{
+    <div class="section">
+        <h3>Experience</h3>
+        @foreach (var ex in Model.Experiences)
+        {
+            <div class="entry">
+                <strong>@ex.CompanyName</strong> - @ex.Position<br />
+                <span class="small-text">
+                    @ex.StartDate - @ex.EndDate @if (ex.IsCurrent)
+                    {
+                        <span>(Current)</span>
+                    }
+                </span><br />
+                @if (!string.IsNullOrWhiteSpace(ex.Duties) && ex.Duties.ToLower() != "not provided")
+                {
+                    <div>Duties: @ex.Duties</div>
+                }
+            </div>
+        }
+    </div>
+}
+
+@if (Model.Skills?.Any(s => !string.IsNullOrWhiteSpace(s.SkillName)) == true)
+{
+    <div class="section">
+        <h3>Skills</h3>
+        <ul>
+            @foreach (var skill in Model.Skills)
+            {
+                @if (!string.IsNullOrWhiteSpace(skill.SkillName))
+                {
+                    <li>@skill.SkillName @if (!string.IsNullOrWhiteSpace(skill.SkillType))
+                        {
+                            @skill.SkillType
+                        }</li>
+                }
+            }
+        </ul>
+    </div>
+}
+
+@if (Model.Languages?.Any() == true)
+{
+    <div class="section">
+        <h3>Languages</h3>
+        <ul>
+            @foreach (var lang in Model.Languages)
+            {
+                @if (!string.IsNullOrWhiteSpace(lang.LanguageName))
+                {
+                    <li>@lang.LanguageName @if (!string.IsNullOrWhiteSpace(lang.LanguageLevel))
+                        {
+                            @lang.LanguageLevel
+                        }</li>
+                }
+            }
+        </ul>
+    </div>
+}
+
+@if (Model.Certificates?.Any() == true)
+{
+    <div class="section">
+        <h3>Certificates</h3>
+        @foreach (var cert in Model.Certificates)
+        {
+            <div class="entry">
+                <strong>@cert.TopicName</strong> - @cert.ProviderName<br />
+                <span class="small-text">Issued: @cert.IssuedDate</span>
+                @if (!string.IsNullOrWhiteSpace(cert.ExpirationDate))
+                {
+                    <span class="small-text"> | Expires: @cert.ExpirationDate</span>
+                }<br />
+                @if (!string.IsNullOrWhiteSpace(cert.CertificateUrl))
+                {
+                    <span>URL: @cert.CertificateUrl</span>
+                }
+            </div>
+        }
+    </div>
+}

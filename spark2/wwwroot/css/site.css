@@ -1,0 +1,112 @@
+html {
+    font-size: 14px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+#wrapper {
+    flex: 1;
+}
+
+#content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
+  h1, h2, h3, h4, h5, h6, p, div, li {
+    color: #000 !important;
+}
+
+a.small {
+    text-decoration: none;
+}
+
+    a.small:hover {
+        text-decoration: underline;
+    }
+
+
+
+    .sidebar .nav-link:hover {
+        background-color: rgba(220, 53, 69, 0.15); 
+        color: #e74a3b;
+    }
+
+.sidebar .nav-item.active .nav-link {
+     
+    color: #e74a3b;
+    font-weight: 600;
+}
+
+.pdf-export {
+    background: white;
+}
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    .pdf-export, .pdf-export * {
+        visibility: visible !important;
+    }
+
+    .pdf-export {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #resumeZoom {
+        padding: 0.5in;
+    }
+
+
+    .banner-img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        object-position: center;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+    .profile-details {
+        margin-top: -80px;
+        background-color: antiquewhite;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+        border-bottom: 2px solid #dc3545;
+        padding-bottom: 0.3rem;
+        margin-bottom: 1.5rem;
+    }

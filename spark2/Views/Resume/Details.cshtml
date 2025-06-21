@@ -1,0 +1,257 @@
+﻿ @model spark2.Models.Entities.Resume
+@{
+    ViewData["ShowSidebar"] = false;
+    ViewData["Title"] = "Resume";
+
+    bool IsValid(string value) => !string.IsNullOrWhiteSpace(value) && value.Trim().ToLower() != "not provided";
+    string FormatDateRange(string start, string end)
+    {
+        if (IsValid(start) && IsValid(end)) return $"{start} – {end}" ;
+        if (IsValid(start)) return $"{start} – Present";
+        return "";
+    }
+}
+<div class="d-flex flex-wrap justify-content-center align-items-center gap-2 mb-2">
+    <button onclick="downloadResumePdf()" class="btn btn-danger">
+        <i class="bi bi-download"></i> Download
+    </button> 
+
+    <button class="btn btn-danger text-capitalize text-center" data-bs-toggle="modal" data-bs-target="#linkModal">
+        <i class="bi bi-send"></i> Share
+    </button>
+</div>
+
+<!-- Share Modal -->
+<div class="modal fade" id="linkModal" tabindex="-1" aria-labelledby="linkModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="linkModalLabel">Share This Link</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="shareLinkInput" class="form-control mb-3" readonly>
+                <button onclick="copyLinkFromInput()" class="btn btn-primary">Copy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pdf-export mx-auto bg-white shadow-sm" style="max-width: 800px; font-size: 0.85rem;">
+    <div id="resumeZoom" class="p-3">
+
+        <!-- Header -->
+        <div class="text-center mb-2">
+            @if (IsValid(Model.FirstName) || IsValid(Model.LastName))
+            {
+                <h2 class="fw-bold mb-1">@Model.FirstName @Model.LastName</h2>
+            }
+
+            @if (IsValid(Model.Title))
+            {
+                <div class="text-uppercase fw-semibold text-muted mb-1" style="font-size: 0.9rem;">@Model.Title</div>
+            }
+
+            <div class="text-muted small">
+                @{
+                    var contactParts = new List<string>();
+
+                    if (IsValid(Model.PhoneNumber)) contactParts.Add(Model.PhoneNumber);
+                    if (IsValid(Model.Email)) contactParts.Add(Model.Email);                   
+                    if (IsValid(Model.Address)) contactParts.Add(Model.Address);
+                    if (IsValid(Model.Link1)) contactParts.Add($"<a href='{Model.Link1}' target='_blank'>LinkedIn</a>");
+                    if (IsValid(Model.Link2)) contactParts.Add($"<a href='{Model.Link2}' target='_blank'>Portfolio</a>");
+                }
+                @Html.Raw(string.Join(" | ", contactParts))
+            </div>
+        </div>
+
+        @if (IsValid(Model.Summary))
+        {
+            <h5 class="text-uppercase border-top border-dark pt-2 mt-2 fw-bold">Summary</h5>
+            <p class="mt-2">@Model.Summary</p>
+        }
+
+        <!-- Skills -->
+        @{
+            var validSkills = Model.Skills
+            .Where(s => IsValid(s.SkillName))
+            .GroupBy(s => IsValid(s.SkillType) ? s.SkillType.Trim() : "Other")
+            .ToList();
+        }
+        @if (validSkills.Any())
+        {
+            <h5 class="text-uppercase border-top border-dark pt-2 mt-2 fw-bold">Skills</h5>
+            <ul class="list-unstyled ps-0">
+                @foreach (var group in validSkills)
+                {
+                    <li class="mb-1">
+                        <strong class="text-capitalize">@group.Key:</strong>
+                        @string.Join(", ", group.Select(g => g.SkillName))
+                    </li>
+                }
+            </ul>
+        }
+
+        <!-- Experience -->
+        @{
+            var validExperiences = Model.Experiences
+            .Where(e => IsValid(e.CompanyName) || IsValid(e.Position) || IsValid(e.Duties))
+            .ToList();
+        }
+        @if (validExperiences.Any())
+        {
+            <h5 class="text-uppercase border-top border-dark pt-2 mt-2 fw-bold">Professional Experience</h5>
+            @foreach (var exp in validExperiences)
+            {
+                <div class="mb-2">
+                    @if (IsValid(exp.Position))
+                    {
+                        <strong>@exp.Position</strong>
+                    }
+                    <div class="d-flex justify-content-between text-muted small">
+                        <div>@(IsValid(exp.CompanyName) ? exp.CompanyName : "")</div>
+                        <div>@FormatDateRange(exp.StartDate, exp.EndDate)</div>
+                    </div>
+                    @if (IsValid(exp.Duties))
+                    {
+                        var dutiesList = exp.Duties
+                        .Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(d => d.Trim())
+                        .Where(d => !string.IsNullOrWhiteSpace(d))
+                        .ToList();
+
+                        if (dutiesList.Any())
+                        {
+                            <ul class="mb-1 mt-1">
+                                @foreach (var duty in dutiesList)
+                                {
+                                    <li>@(duty).</li>
+                                }
+                            </ul>
+                        }
+                    }
+                </div>
+            }
+        }
+
+        <!-- Education -->
+        @{
+            var validEducations = Model.Educations
+            .Where(e => IsValid(e.UniversityName) || IsValid(e.Major) || IsValid(e.DegreeType) || IsValid(e.GPA))
+            .ToList();
+        }
+        @if (validEducations.Any())
+        {
+            <h5 class="text-uppercase border-top border-dark pt-2 mt-2 fw-bold">Education</h5>
+            @foreach (var edu in validEducations)
+            {
+                <div class="mb-2">
+                    <strong>@edu.DegreeType</strong>
+                    @if (IsValid(edu.Major))
+                    {
+                        @($" in {edu.Major}")
+                    }
+                    <br />
+                    <div class="d-flex justify-content-between text-muted small">
+                        <div>@edu.UniversityName</div>
+                        <div>@FormatDateRange(edu.StartDate, edu.EndDate)</div>
+                    </div>
+                    @if (IsValid(edu.GPA))
+                    {
+                        <div class="text-muted small">GPA: @edu.GPA</div>
+                    }
+                </div>
+            }
+        }
+
+        <!-- Languages -->
+        @{
+            var validLanguages = Model.Languages.Where(l => IsValid(l.LanguageName)).ToList();
+        }
+        @if (validLanguages.Any())
+        {
+            <h5 class="text-uppercase border-top border-dark pt-2 mt-2 fw-bold">Languages</h5>
+            <ul class="ps-3">
+                @foreach (var lang in validLanguages)
+                {
+                    <li>@lang.LanguageName @(IsValid(lang.LanguageLevel) ? $"- {lang.LanguageLevel}" : "")</li>
+                }
+            </ul>
+        }
+
+        <!-- Certifications -->
+        @{
+            var validCerts = Model.Certificates
+            .Where(c => IsValid(c.TopicName) || IsValid(c.ProviderName) || IsValid(c.CertificateUrl))
+            .ToList();
+        }
+        @if (validCerts.Any())
+        {
+            <h5 class="text-uppercase border-top border-dark pt-2 mt-2 fw-bold">Certifications</h5>
+            <ul class="ps-3">
+                @foreach (var cert in validCerts)
+                {
+                    <li class="mb-1">
+                        <strong>@cert.TopicName</strong>
+                        @(IsValid(cert.ProviderName) ? $" - {cert.ProviderName}" : "")<br />
+                        @if (IsValid(cert.IssuedDate) || IsValid(cert.ExpirationDate))
+                        {
+                            <small class="text-muted">
+                                @(IsValid(cert.IssuedDate) ? $"Issued: {cert.IssuedDate}" : "")
+                                @(IsValid(cert.IssuedDate) && IsValid(cert.ExpirationDate) ? ", " : "")
+                                @(IsValid(cert.ExpirationDate) ? $"Expires: {cert.ExpirationDate}" : "")
+                            </small>
+                            <br />
+                        }
+                        @if (IsValid(cert.CertificateUrl))
+                        {
+                            <a href="@cert.CertificateUrl" target="_blank">@cert.CertificateUrl</a>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+
+  
+
+
+
+   
+<script>
+    function downloadResumePdf() {
+        const resumeElement = document.querySelector('.pdf-export');
+        const opt = {
+            margin: 0,
+            filename: 'resume.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(resumeElement).save() ;
+    }     
+
+    function copyLinkFromInput() {
+        const input = document.getElementById('shareLinkInput');
+        input.select();
+        input.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(input.value)
+            .then(() => alert("Link copied to clipboard!"))
+            .catch(err => console.error("Failed to copy: ", err));
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const input = document.getElementById('shareLinkInput');
+        const modal = document.getElementById('linkModal');
+        if (modal) {
+            const bsModal = new bootstrap.Modal(modal);
+            modal.addEventListener('show.bs.modal', () => {
+                if (input) {
+                    input.value = window.location.href;
+                }
+            });
+        }
+    });
+</script>
