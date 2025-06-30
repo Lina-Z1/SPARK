@@ -1,6 +1,6 @@
 # SPARK 🔥 — Resume & Portfolio Builder Powered by AI
 
-**SPARK** is a modern, AI-assisted resume and portfolio builder built with **.NET Core MVC**, **Entity Framework**, and the **OpenAI API**. It empowers users to craft professional resumes and online portfolios with ease, combining manual customization and AI-generated content in one seamless platform.
+**SPARK** is a modern, AI-assisted resume and portfolio builder built with **.NET Core MVC**, **Entity Framework**, and  **OpenAI API**. It empowers users to craft professional resumes and  portfolios with ease, combining manual customization and AI-generated content in one seamless platform.
 
 ---
 
@@ -25,11 +25,11 @@
 
 - **.NET Core MVC** (C#)
 - **Entity Framework Core**
-- **ASP.NET Core Identity (Individual Accounts)**
+- **ASP.NET Core Identity**
 - **OpenAI API**
 - **Bootstrap 5**
 - **Razor Views**
-- **SQL Server** or **SQLite**
+- **SQL Server**  
 
 ---
 
