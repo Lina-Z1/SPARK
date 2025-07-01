@@ -68,7 +68,7 @@
    <!-- Portfolio Details -->
   <div style="flex: 1 1 300px; max-width: 200px;">
     <h4>🧾 Portfolio Details</h4>
-    <img src="screenshots/PortfolioD.png" alt="Portfolio Details"
+    <img src="screenshots/portfolioD.png" alt="Portfolio Details"
          style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
   </div>
 
@@ -111,7 +111,7 @@
    <!--Register -->
   <div style="flex: 1 1 300px; max-width: 200px;">
     <h4>📝 Register </h4>
-    <img src="screenshots/register.png" alt="register"
+    <img src="screenshots/Register.png" alt="register"
          style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
   </div>
 
@@ -130,7 +130,7 @@
          style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
   </div>
 
-    <!-- Add User -->
+  <!-- Add User -->
   <div style="flex: 1 1 300px; max-width: 200px;">
     <h4>📝 Add User</h4>
     <img src="screenshots/add-user.png" alt="Add User"
@@ -144,14 +144,14 @@
          style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
   </div>
 
-    <!-- View User -->
+  <!-- View User -->
   <div style="flex: 1 1 300px; max-width: 200px;">
     <h4>📝 View User</h4>
     <img src="screenshots/view-user.png" alt="View User"
          style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
   </div>
 
-     <!--access-denied -->
+  <!--access-denied -->
   <div style="flex: 1 1 300px; max-width: 200px;">
     <h4>📝 Access-denied Page</h4>
     <img src="screenshots/access-denied.png" alt="access-denied"
@@ -165,10 +165,24 @@
          style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
   </div>
 
+   <!-- Edit Resume   -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>📝 Edit Resume  </h4>
+    <img src="screenshots/edit-resume.png" alt="Edit Resume "
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
   <!-- Manual Portfolio Creation -->
   <div style="flex: 1 1 300px; max-width: 200px;">
     <h4>📝 Manual Portfolio Creation</h4>
     <img src="screenshots/manual-Pcreate.png" alt="Manual Portfolio Creation"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+  <!-- Edit Portfolio   -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>📝 Edit Portfolio </h4>
+    <img src="screenshots/edit-portfolio.png" alt="Edit Portfolio"
          style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
   </div>
 
