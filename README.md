@@ -35,7 +35,6 @@
 
 ## 📸 Screenshots
 
-
 - **🏠 Home Page**  
   ![Home Page](screenshots/home.png)
 
@@ -54,9 +53,11 @@
   - **🛠 Edit Resume Page**  
   ![Edit Resume](screenshots/edit-resume.png)
 
-- **🧾 Resume Page (Public/Private View)**  
+- **🧾 Resume List Page (Private View)**  
   ![Resume Page](screenshots/resume.png)
-
+  
+- **🧾 Resume Details Page (Public/Private View)**  
+  ![Resume Details](screenshots/resumeD.png)
 
    - **📝 Manual Portfolio Creation**  
   ![Manual Create](screenshots/manual-Pcreate.png)
@@ -67,11 +68,18 @@
 - **🛠 Edit Portfolio Page**  
   ![Edit Portfolio](screenshots/edit-portfolio.png)
 
-  - **🌐 Portfolio Page (Public/Private View)**  
+  - **🌐 Portfolio List Page (Private View)**  
   ![Portfolio Page](screenshots/portfolio.png)
 
+  - **🌐 Portfolio Details Page (Public/Private View)**  
+  ![Portfolio Details](screenshots/portfolioD.png)
+
 - **👤 Dashboard Page (Admin only)**  
-  ![Add User](screenshots/dashboard.png)
+  ![Dashboard](screenshots/dashboard.png)
+
+
+- **👤 Manage User Page (Admin only)**  
+  ![Manage User](screenshots/manage-user.png)
 
 
 - **👤 Add User Page (Admin only)**  
@@ -87,6 +95,12 @@
 - **🚫 Access Denied Page**  
   ![Access Denied](screenshots/access-denied.png)
 
+  - ** Login Page**  
+  ![Register](screenshots/login.png)
+
+- ** Register Page**  
+  ![Login](screenshots/Register.png)
+
 ---
 
 ## 📂 Pages & Routing Overview
@@ -99,11 +113,13 @@
 | **Create Resume (Manual)**  | Manual form to build a resume                   | Authenticated Users  |
 | **Create Resume (AI)**      | Uses OpenAI API to generate content             | Authenticated Users  |
 | **Edit Resume**             | Modify saved resumes                            | Authenticated Users  |
-| **Resume Page**             | View own or shared resume                       | Public/Private       |
+| **Resume Page**             | View List of resumes                            |Private               |
+| **Resume Details**          | View  resume details                            |Public/Private        |
 | **Create Portfolio(Manual)**| Manual form to build a portfolio                | Authenticated Users  |
 | **Create Portfolio(AI)**    | Uses OpenAI API to generate content             | Authenticated Users  |
 | **Edit Portfolio**          | Update portfolio projects/content               | Authenticated Users  |
-| **Portfolio Page**          | Public-facing portfolio                         | Public/Private       |
+| **Portfolio Page**          | View List of portfolios                         | Private              |
+| **Portfolio Details**       | View  portfolio details                         |Public/Private        |
 | **Add/Edit/View User**      | Admin panel for user management                 | Admin Only           |
 | **User Profile**            | View user info                                  | User Only            |
 
