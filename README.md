@@ -15,10 +15,10 @@
   Publish personal portfolios and Resumes with flexible visibility options.
 
 - 🔐 **Secure User Authentication**  
-  Role-based access control for users and admins with account protection features.
+  Role-based access control for users and admins.
 
 - 📊 **Admin Dashboard**  
-  View platform-wide stats and manage users, resumes, and portfolios with full oversight and control.
+  View platform-wide stats and manage users with full oversight and control.
 
 ## 🛠 Technologies Used
 
