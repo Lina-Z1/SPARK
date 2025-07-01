@@ -2,7 +2,6 @@
 
 **SPARK** is a modern, AI-assisted resume and portfolio builder built with **.NET Core MVC**, **Entity Framework**, and  **OpenAI API**. It empowers users to craft professional resumes and  portfolios with ease, combining manual customization and AI-generated content in one seamless platform.
 
----
 
 ## ✨ Key Features
 
@@ -31,9 +30,9 @@
 - **Razor Views**
 - **SQL Server**  
 
----
+ 
 <!-- Screenshot Gallery -->
-<h2>📸 Screenshots</h2>
+## 📸 Website OverView
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
 
@@ -201,15 +200,15 @@
 | **Create Resume (Manual)**  | Manual form to build a resume                   | Authenticated Users  |
 | **Create Resume (AI)**      | Uses OpenAI API to generate content             | Authenticated Users  |
 | **Edit Resume**             | Modify saved resumes                            | Authenticated Users  |
-| **Resume Page**             | View List of resumes                            |Private               |
+| **Resume Page**             | View List of resumes                            | Authenticated Users  |
 | **Resume Details**          | View  resume details                            |Public/Private        |
 | **Create Portfolio(Manual)**| Manual form to build a portfolio                | Authenticated Users  |
 | **Create Portfolio(AI)**    | Uses OpenAI API to generate content             | Authenticated Users  |
 | **Edit Portfolio**          | Update portfolio projects/content               | Authenticated Users  |
-| **Portfolio Page**          | View List of portfolios                         | Private              |
+| **Portfolio Page**          | View List of portfolios                         | Authenticated Users  |
 | **Portfolio Details**       | View  portfolio details                         |Public/Private        |
 | **Add/Edit/View User**      | Admin panel for user management                 | Admin Only           |
-| **User Profile**            | View user info                                  | User Only            |
+| **User Profile**            | View user info                                  | Authenticated Users  |
 
----
+
 
