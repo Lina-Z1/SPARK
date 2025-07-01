@@ -124,4 +124,66 @@
 | **User Profile**            | View user info                                  | User Only            |
 
 ---
+<!-- Screenshot Gallery -->
+<h2>📸 Screenshots</h2>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+
+  <!-- Home Page -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>🏠 Home Page</h4>
+    <img src="screenshots/home.png" alt="Home Page"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+  <!-- About Page -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>ℹ️ About Page</h4>
+    <img src="screenshots/about.png" alt="About Page"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+  <!-- Profile Page -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>👤 Profile Page</h4>
+    <img src="screenshots/profile.png" alt="Profile Page"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+  <!-- Manual Resume Creation -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>📝 Manual Resume Creation</h4>
+    <img src="screenshots/manual-Rcreate.png" alt="Manual Resume Creation"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+  <!-- AI Resume Generation -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>🤖 AI Resume Generation</h4>
+    <img src="screenshots/ai-Rgenerate.png" alt="AI Resume Generation"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+  <!-- Resume Details -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>🧾 Resume Details</h4>
+    <img src="screenshots/resumeD.png" alt="Resume Details"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+  <!-- Portfolio List -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>🌐 Portfolio List</h4>
+    <img src="screenshots/portfolio.png" alt="Portfolio List"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div style="flex: 1 1 300px; max-width: 200px;">
+    <h4>👤 Admin Dashboard</h4>
+    <img src="screenshots/dashboard.png" alt="Admin Dashboard"
+         style="width: 100%; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 12px;" />
+  </div>
+
+</div>
 
