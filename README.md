@@ -1,11 +1,8 @@
 # SPARK : Resume & Portfolio Builder Powered by AI
 <img width="1024" height="483" alt="gif" src="https://github.com/user-attachments/assets/b5b3bd51-1132-4bce-96bd-0e6099455311" />
 
----
-##  Overview
-Modern, AI-assisted resume and portfolio builder built with **.NET Core MVC**, **Entity Framework**, and  **OpenAI API**. It empowers users to craft professional resumes and  portfolios with ease, combining manual customization and AI-generated content in one seamless platform.
 
-## 🛠 Technologies Used
+## 🛠 Tech Stack
 
 ![.NET Core MVC](https://img.shields.io/badge/.NET%20Core%20MVC-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
@@ -15,6 +12,11 @@ Modern, AI-assisted resume and portfolio builder built with **.NET Core MVC**, *
 ![Bootstrap 5](https://img.shields.io/badge/Bootstrap%205-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![Razor Views](https://img.shields.io/badge/Razor%20Views-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
+
+##  Overview
+Modern, AI-assisted resume and portfolio builder built with **.NET Core MVC**, **Entity Framework**, and  **OpenAI API**. It empowers users to craft professional resumes and  portfolios with ease, combining manual customization and AI-generated content in one seamless platform.
+
+
 
 
 ## ✨ Key Features
