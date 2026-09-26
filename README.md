@@ -1,4 +1,4 @@
-# SPARK : Resume & Portfolio Builder Powered by AI
+# SPARK | Resume & Portfolio Builder Powered by AI
 <img width="1024" height="483" alt="gif" src="https://github.com/user-attachments/assets/b5b3bd51-1132-4bce-96bd-0e6099455311" />
 
 
